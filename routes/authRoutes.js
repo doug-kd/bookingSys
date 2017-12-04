@@ -1,0 +1,16 @@
+const passport = require('passport'); // requiring passport npm module
+
+module.exports = app => {
+
+app.get(
+      '/auth/google', //when a user clicks/uses this route we send them into the below flow
+       passport.authenticate('google', { //we're authenticating - although we never set up google as an identifier - GoogleStrategy has an undercover/internal or something?! link to 'google'
+        scope:['profile', 'email'] //asking for access to their profile info and their e-mail  (google has an internal list we could also ask for all drive content or pictures etc etc)
+      })
+    );
+
+    app.get(
+      '/auth/google/callback',
+      passport.authenticate('google') // same rule with the string 'google' this line gives access to the code that is given when google returns. it then returns it and asks for a user profile
+    )
+};
