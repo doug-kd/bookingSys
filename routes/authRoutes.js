@@ -9,8 +9,15 @@ app.get(
       })
     );
 
-    app.get(
-      '/auth/google/callback',
-      passport.authenticate('google') // same rule with the string 'google' this line gives access to the code that is given when google returns. it then returns it and asks for a user profile
-    )
+app.get( '/auth/google/callback', passport.authenticate('google') // same rule with the string 'google' this line gives access to the code that is given when google returns. it then returns it and asks for a user profile
+);
+
+app.get('/api/logout', (req, res) => { //passport automatically attaches req.logout it kills the cookie
+  req.logout();
+  res.send(req.user);
+})
+
+app.get('/api/current_user',(req,res) => {
+  res.send(req.user);
+  });
 };
