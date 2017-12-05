@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
+require ('./models/User');
 require ('./services/passport');
+
 
 mongoose.connect(keys.mongoURI); // connecting to MLabs but keeping our key secures in the config file which is added to the .gitignore file
 
